@@ -24,6 +24,7 @@ def genTrans_te(theta, distance, steps, start=-math.pi / 2, end=math.pi / 2):
         t = RpToTrans(r, np.array([0, 0, 0]))
         out.append(t @ trans_te0 @ trans_e0e)
     return out
+
 def genTrans_se(theta,distance,steps,x_offset,start=-math.pi / 2, end=math.pi / 2):
     trans_te = genTrans_te(theta, distance, steps, start, end)
     T_st = RpToTrans(np.eye(3), np.array([x_offset, 0, 0]))
