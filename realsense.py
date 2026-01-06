@@ -1,5 +1,7 @@
 import pyrealsense2 as rs
-
+import numpy as np
+import cv2
+import time
 
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -29,6 +31,8 @@ pipeline.start(config)
 
 try:
     while True:
+
+        # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
         depth_frame = frames.get_depth_frame()
         color = frames.get_color_frame()
@@ -37,8 +41,12 @@ try:
             continue
 
         width, height = depth_frame.get_width(), depth_frame.get_height()
+        print(width, height)
         dist = depth_frame.get_distance(width // 2, height // 2)
-        print(f"The camera is facing an object {dist:.3f} meters away", end="\r")
+        print(f"The camera is facing an object {dist:.3f} meters away", end="\n")
+        time.sleep(1e-2)
 
 finally:
-    pipeline.stop() # Stop streaming
+
+    # Stop streaming
+    pipeline.stop()

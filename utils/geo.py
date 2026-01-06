@@ -9,7 +9,7 @@ def genTrans_te(theta, distance, steps, start=-math.pi / 2, end=math.pi / 2):
 
     # from tool(object, target) frame to end-effector-0 (0 assume the word orientation)
     trans_te0 = np.array([[1, 0, 0, x_offset], [0, 1, 0, 0], [0, 0, 1, z_offset], [0, 0, 0, 1]])
-    R_e0e = MatrixExp3(VecToso3(np.array([0, theta + math.pi / 2, 0])))
+    R_e0e = MatrixExp3(VecToso3(np.array([0, math.pi-theta, 0])))
     trans_e0e = RpToTrans(R_e0e, np.array([0, 0, 0]))
 
     omiga = np.linspace(start, end, steps)
